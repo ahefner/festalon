@@ -32,37 +32,30 @@ static int mm_support(void)
 #ifdef ARCH_X86
     int rval;
     int eax, ebx, ecx, edx;
+    long dummy;
     char vendor[13] = "UnknownVndr";
     
+    /* CPUID availability (xFLAGS ID bit togglability) test */
     __asm__ __volatile__ (
-                          /* See if CPUID instruction is supported ... */
-                          /* ... Get copies of EFLAGS into eax and ecx */
+                          /* Load xFLAGS into xAX */
                           "pushf\n\t"
-#ifdef __x86_64__
-                          "pop %0\n\t"
-#else
-                          "popl %0\n\t"
-#endif
-                          "movl %0, %1\n\t"
-                          
-                          /* ... Toggle the ID bit in one copy and store */
-                          /*     to the EFLAGS reg */
-                          "xorl $0x200000, %0\n\t"
-                          "push %0\n\t"
+                          "pop %2\n\t"
+                          /* Copy EAX to ECX (low 32-bits of xFLAGS) */
+                          "mov %0, %1\n\t"
+                          /* Toggle xFLAGS.ID bit in EAX */
+                          "xor $0x200000, %0\n\t"
+                          /* Load xAX into xFLAGS */
+                          "push %2\n\t"
                           "popf\n\t"
-                          
-                          /* ... Get the (hopefully modified) EFLAGS */
+                          /* Load (hopefully modified) xFLAGS into xAX */
                           "pushf\n\t"
-#ifdef __x86_64__
-                          "pop %0\n\t"
-#else
-                          "popl %0\n\t"
-#endif
+                          "pop %2\n\t"
                           : "=a" (eax), "=c" (ecx)
-                          :
+                          : "a" (dummy)
                           : "cc" 
                           );
     
+    /* Check whether xFLAGS.ID bit was toggled */
     if (eax == ecx)
         return 0; /* CPUID not supported */
     
