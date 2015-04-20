@@ -19,7 +19,7 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include "filter.h"
+#include "../filter.h"
 #include "x6502struct.h"
 
 typedef struct {

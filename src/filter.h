@@ -17,12 +17,8 @@ typedef struct {
         int soundq;
         int rate;
 	float coeffs[NCOEFFS] __attribute__ ((aligned (16)));
-
-	#ifdef ARCH_X86
-	int16 coeffs_i16[NCOEFFS] __attribute__ ((aligned (8)));
-	#elif ARCH_POWERPC
 	int16 coeffs_i16[NCOEFFS] __attribute__ ((aligned (16)));
-	#endif
+
 
 	int32 SoundVolume;
 

@@ -1,7 +1,7 @@
 #ifndef CART_H
 #define CART_H
 
-#include "types.h"
+#include "../types.h"
 #include "x6502.h"
 
 typedef struct {
