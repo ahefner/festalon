@@ -1,0 +1,6 @@
+February 26, 2005:
+	
+	Festalon versions 0.5.0 and newer are now under licensed the GNU GPL.  0.4.x and older will remain under the LGPL, 
+	of course.
+	This change was necessitated by parts of the HES playing code, and the sound resampling library Festalon now uses,
+	being licensed under the GPL.

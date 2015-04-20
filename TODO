@@ -1,0 +1,22 @@
+Fix volume levels of expansion sound chips, and see if their DACs exhibit
+any non-linearity.  Also implement a global volume-lowering effect for
+all expansion sound chips(they have a resistor across the audio in and audio 
+out)...  
+
+Console: Pause audio until the output buffer is full, and then begin playing.  The SDL SexyAL driver does this
+	 automatically.
+
+Add support for 64-bit floating point with the JACK output code.  Fix JACK code to support stereo(IMPORTANT!).
+
+Improve volume level calculation in the TG16/PCE emulation code(if it's even broken).
+
+Correct shared library support in the autoconf/automake scripts for xmms/BMP.
+
+
+SexyAL: Better(dynamic) latency reporting.
+
+	Finish the Sound Blaster code.
+
+	Add OSX CoreAudio code.  This is a lower priority now that the SDL code is working, but it's still important.
+
+	Implement pause and clear functionality with all drivers.

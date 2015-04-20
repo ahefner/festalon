@@ -1,0 +1,20 @@
+Format: 1.0
+Source: festalon
+Version: 0.5.5-1
+Binary: festalon, xmms-festalon
+Maintainer: Nobody N. Nobody <nobody@nowhere.123>
+Architecture: any
+Standards-Version: 3.6.1.0
+Build-Depends: debhelper (>= 4.0.0), xmms-dev
+Section: sound
+Priority: optional
+#Package: festalon
+#Source: festalon
+#Version: 0.5.5-1
+#Maintainer: Nobody N. Nobody <nobody@nowhere.123>
+#Depends: ${shlibs:Depends}
+#Architecture: any
+Description: plays NSF/NSFE and HES music files
+ Festalon is a text-based player for NSF(NES), NSFE(NES), and HES(TG16) music files, which contain program data that is emulated by Festalon, similar to SID players.
+ .
+ Festalon dynamically resamples the sound stream, from the emulated system's maximum sound output rate of change(effectively the CPU speed), using internal FIR filters and libsamplerate, so it is somewhat CPU intensive.

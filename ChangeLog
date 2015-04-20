@@ -1,0 +1,186 @@
+0.5.5:
+	Added "bmp"(Beep Media Player) interface support(./configure --enable-interface=bmp) to the autoconf script.
+
+	Modified the autoconf/automake scripts to generate the xmms library properly, instead of relying on gcc's
+	iffy "-share" argument.
+
+	Made a very small optimization to the MMX filtering code.
+
+	Made optimizations to the HES playing code.
+
+0.5.4:  
+	Added sanity checks to FESTAI_SetVolume() to make sure -999 < volume < 999.  Negative values are still allowed,
+	because we want to allow the truly insane people to invert the phase at will.
+
+	Modified the SexyAL code to better support dynamically-loaded driver modules in the future.
+
+	Added AltiVec-using downsampling code.  Festalon is still awfully slow on G4 processors...
+
+	Fixed a compilation error in filter.h/filter.c that occurred when compiling on non-x86 platforms.
+
+	Fixed x86 CPU detection when using a non-GNU version of expr(particularly, on FreeBSD).
+
+0.5.3:
+	Updated "AUTHORS" and "NEWS".
+
+	Console:  Cleaned informational text.
+
+	Console:  Added support for using SDL's audio output.	
+
+	Console:  Fixed sound recording feature.
+
+0.5.2:
+
+	Reworked the sound output device support for the console build.
+
+	Made more HES volume adjustments.  It still doesn't sound correct.
+
+	Added AMD64/x86_64/whatever-sexy-floor MMX filtering code.
+
+0.5.0:	XMMS:  Added a hack to +1/-1 the current song when a change of +5/-5 would have occurred.  This allows the use of
+	cursor keys to go up and down the songs, but will obviously break the trackbar when trying to select a song +-5
+	away from the current song.
+
+	XMMS:  The current time display and trackbar will now reflect the current song, rather than the current song - 1.
+
+	Added code to play HES(ripped TG16/PC Engine music in an awful format) files, based roughly on "hesplay".  The LFO
+	capabilities aren't emulated(yet?).
+
+	Console:  Reduced the number of updates-per-second of the time display, so Festalon will run a bit better on slower
+	processors(or over the network).
+
+	Added MMX, SSE-,SSE3-, and 3DNow!-instruction-using FIR filtering code.
+
+	Optimized the square wave channel emulation code with experimental optimizations.
+	Ooooh, experimental!
+
+	Added a low-pass filter by using the functions provided by a modified FidLib
+	(http://uazu.net/fidlib/).
+
+	Relicensed Festalon under the GNU GPL, from the GNU LGPL.
+
+	Rewrote the resampling code to use simple FIR code, and libsamplerate.
+
+	Made optimizations to the FDS, MMC5, N106, and VRC6 sound emulation code.
+
+	Tweaked the sound emulation code and added a CPU speedup hack.
+
+	Added functions to create NSFs/NSFEs.
+
+	Added a third argument to FESTAI_GetFileInfo() to specify whether or not to load
+	the NSF program data.
+
+	Added NSFRawData and NSFRawDataSize variables to the FESTALON structure to aid
+	in the (re)creation of NSFs and NSFEs.
+	
+	Added a "VideoSystem" variable to the FESTALON structure.  The internally-used PAL
+	variable is now set in the common initialization code, after the NSF/NSFE loading
+	code.
+	
+	Fixed the structure NSF_HEADER.  It had an 8-byte variable tacked on at the end, from
+	debugging(I guess?), that made it longer than it should have been.
+
+	Fixed a bug in the NSFE loader.  A local variable was declared "static" when it should
+	not have been.
+
+0.4.0:  Fixed a rather stupid bug that could break loading of certain non-bankswitched NSFs.
+
+	XMMS:  Fixed a "bug" that was breaking the ALSA output plugin.
+
+	Added partial NSFE support.
+
+	Console:  Altered which keys enable and disable channels.  Listed in order of channel:
+		1,2,3,4,5,6,7,8,9,0,!,@,#,$,%,^,&,*,(,)
+
+	Added code to allow NSFs with a specified load address < 0x6000 to play.
+	
+	XMMS:  Fixed a bug which could cause severe problems on many output
+	plugins.
+
+	Console:  Improved the correctness of the time reported(actual calculated
+	time into the song rather than how long the song has been playing).
+
+	Console:  Removed DOS support.  Use Linux, crazy DOS people!
+
+	Added support for NSFs with multiple expansion sound chips.  It may not sound
+	perfect, due to errors in relative volume levels in Festalon being magnified between 
+	the sound chips.
+
+	Massive source code cleanup and movement towards modularization.  0.4.0 will probably
+	be a bit slower than 0.3.0.
+
+	Removed the ugly NeoFill() hacks I used to get VRC7 sound working.
+
+0.3.0:	Re-forked off of FCE Ultra 0.98.x.  Sound emulation is greatly improved, but
+	there could still be some quirks.  The sound code is rather messy right now, and
+	will need to be cleaned(I need hired monkey cleaners).
+
+0.2.4:
+	Cleaned up the Makefiles.
+
+	Updated the TODO.
+
+	Replaced the inline assembly in filter.c with better(on my computer)
+	C code.
+
+0.2.3:
+	Fixed channel disable support for the Namco 106 sound channels.
+
+0.2.2:
+	All:  Updated FDS sound code from FCE Ultra 0.93.
+	All:  Rewrote pieces of Namco 106 sound emulation code to be more 
+	      accurate(including aliasing that is present on the real thing).
+	xmms: Added support for pausing the song.
+
+0.2.1:  
+	All:  Reimplemented a cpu speed hack.
+	All:  Simplified post-downsampling high-pass filter.
+	All:  Modified the way the sound channels are mixed, to be more accurate.
+	All:  Adjusted volume of VRC6 and VRC7 expansion sound channels.
+	All:  Raised default volume to 200%, if that means anything now. :)
+	All:  Modified FDS sound emulation.  It's still not right, though.
+	All:  Deobfuscated triangle wave linear counter emulation.
+	UNIX: Fixed 96KHz playback.
+	Winamp: Increased the maximum value of the volume trackbar
+		to 250%.
+
+0.1.3:
+	All:  Updated README in source code archive.
+	Console:  Usage information is now disabled if no filename(s) is(are)
+		  provided.
+	Console:  Added a time counter.
+        Winamp:  Added support for DSP/effects plugins.
+        Winamp:  Various minor bugs fixed.
+        Winamp:  An installer is now used for the binary release.
+        xmms:  Fixed a few major bugs.
+
+0.1.2:
+        All:  Default volume changed to 175%.
+        All:  Simplified post-downsampling filters.
+        All:  Added support for 96KHz playback rate.
+        Console:  Version is now printed on startup.
+        Winamp:  Updated reported version number.
+        Winamp:  Added an internal volume control trackbar.
+        Winamp:  The last played song will be played whenever an NSF
+                 is stopped and then played again.
+
+0.1.1:
+	Removed a CPU emulation speed hack that was messing up sound
+	emulation.  It may be readded in the future once I figure out how
+	to implement it correctly, as it gave a nice speed boost.
+	
+	Console interface status line is only updated when necessary, not
+	50-60 times a second.
+
+	FME-07, MMC5, and Namco 106 extra sound channels can now be disabled.
+	
+	Installed sigint and sigterm signal handlers to restore the terminal
+	in the console iface for the ctrl-c crazy folk.  Also cleaned up
+	multiple file loading code.
+
+	usleep() is used in xmms plugin now.  Other minor changes.  Still
+	needs work.
+
+
+0.1.0:
+	First release.

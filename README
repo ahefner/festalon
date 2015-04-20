@@ -1,0 +1,59 @@
+*Minimum* CPU requirements:
+
+	NSF Playback:
+		x86	233-266 MHz Pentium II
+		PowerPC	G3/G4 ???
+
+	HES Playback:
+		x86	800-1.0GHz Pentium III
+		PowerPC G4 800 MHz
+
+On x86 platforms, Festalon will take advantage of the following SIMD 
+instruction sets, listed in order of highest preference first:
+	SSE3
+	MMX
+	SSE
+	3DNow!
+
+On PowerPC platforms, AltiVec is always used(meaning your processor must support it to use Festalon!).
+
+			*** IMPORTANT ****
+
+It's strongly recommended that you compile with platform-specific code
+tuning options(-march or at least -mtune).
+	Example: export CFLAGS="-march=i686" ; ./configure
+
+			*** IMPORTANT ****
+
+
+The "float" type on your processor should be 4 bytes long.
+
+You will need to have "libsamplerate" installed before trying to compile.
+It may be obtained at http://www.mega-nerd.com/SRC/
+
+
+Console interface:
+
+	Key		Function
+	---		--------
+
+	Cursor Left	Decrease current song number by 1 and play the song referenced by that number.
+	Cursor Right	Increase current song number by 1 and play the song referenced by that number.
+
+	Cursor Down	Decrease current song number by 10 and play the song referenced by that number.
+	Cursor Up	Increase current song number by 10 and play the song referenced by that number.
+
+	Enter/Return	Restart the current song.
+
+	-               Decrease volume by 1%(of 100%)
+	+/=		Increase volume by 1%(of 100%)
+
+	a		Decrease volume by 25%(of 100%)
+	s		Increase volume by 25%(of 100%)
+
+	p		Pause sound playback.
+
+	1 through 10	Toggle channel disable bit on sound channels 1 through 10.
+	
+	Shift + 	Toggle channel disable bit on sound channels 11 through 20.
+	 1 through 10

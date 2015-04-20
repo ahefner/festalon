@@ -1,0 +1,43 @@
+ ----------------------------------------------------------------------------
+ hesplay
+ ----------------------------------------------------------------------------
+
+ Version 1.0
+
+ by Charles MacDonald
+ E-mail: cgfm2@hotmail.com
+ WWW: http://cgfm2.emuviews.com
+
+ Introduction
+
+ The inspiration to write tgemu came from the need to have a player to
+ listen to HES music files, which are ripped PC-Engine/Turbografx-16 program
+ code much like SID or NSF files. tgemu came into existance, and ended
+ up being a full-fledged emulator rather than just a sound playing utility.
+
+ That said, I've removed all of the extra features from tgemu and have
+ created hesplay, which exclusively plays HES files and does little else.
+
+ hesplay only supports HES files that are in the PCE format, e.g. files
+ that will already work in a PC-Engine emulator. I may add support
+ for HES files that consist of the header and data portions only, but
+ that has to wait for a future update.
+
+ Credits
+
+ I'd like to thank Matt Conte for nosefart, from which I used the DOS timer
+ routines and borrowed some concepts from dos_main.c
+
+ And everyone else: (alphabetically)
+
+ - Bryan McPhail for the HuC6280 CPU emulation.
+ - The MAME team for the SEAL interface code.
+ - Mamiya for inventing the HES format.
+ - Paul Clifford and David Michel for the PSG documentation
+   included in the Magic Kit package.
+ - Richard Bannister for improvements to the sound emulation.
+
+ Source Code
+
+ Read the LICENSE file for more details.
+
