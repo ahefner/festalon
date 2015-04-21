@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "sexyal.h"
@@ -6,6 +7,7 @@
 
 /* kludge.  yay. */
 SexyAL_enumdevice *SexyALI_OSS_EnumerateDevices(void);
+SexyAL_device *SexyALI_AO_Open(char *id, SexyAL_format *format, SexyAL_buffering *buffering);
 SexyAL_device *SexyALI_OSS_Open(char *id, SexyAL_format *format, SexyAL_buffering *buffering);
 SexyAL_device *SexyALI_ESD_Open(char *id, SexyAL_format *format, SexyAL_buffering *buffering);
 SexyAL_device *SexyALI_JACK_Open(char *id, SexyAL_format *format, SexyAL_buffering *buffering);
@@ -77,29 +79,34 @@ void Destroy(SexyAL *iface)
  free(iface);
 }
 
-static SexyAL_driver drivers[] = 
+static SexyAL_driver drivers[] =
 {
-	#if HAVE_OSSDSP
-	{ SEXYAL_TYPE_OSSDSP, "OSS(/dev/dsp*)", "oss", SexyALI_OSS_Open, SexyALI_OSS_EnumerateDevices },
-	#endif
+#if HAVE_LIBAO
+    /* FIXME: Enumerate available devices... */
+    { SEXYAL_TYPE_LIBAO, "libao default device", "libao", SexyALI_AO_Open, NULL },
+#endif
 
-        #if HAVE_JACK
-        { SEXYAL_TYPE_JACK, "JACK", "jack", SexyALI_JACK_Open, NULL },
-        #endif
+#if HAVE_OSSDSP
+    { SEXYAL_TYPE_OSSDSP, "OSS(/dev/dsp*)", "oss", SexyALI_OSS_Open, SexyALI_OSS_EnumerateDevices },
+#endif
 
-        #if HAVE_SDL
-        { SEXYAL_TYPE_SDL, "SDL", "sdl", SexyALI_SDL_Open, NULL },
-        #endif
+#if HAVE_JACK
+    { SEXYAL_TYPE_JACK, "JACK", "jack", SexyALI_JACK_Open, NULL },
+#endif
 
-        #if HAVE_ESOUND
-        { SEXYAL_TYPE_ESOUND, "EsounD", "esd", SexyALI_ESD_Open, NULL },
-        #endif
+#if HAVE_SDL
+    { SEXYAL_TYPE_SDL, "SDL", "sdl", SexyALI_SDL_Open, NULL },
+#endif
 
-        #if HAVE_DIRECTSOUND
-        { SEXYAL_TYPE_DIRECTSOUND, "DirectSound", "dsound", SexyALI_DSound_Open, NULL },
-        #endif
+#if HAVE_ESOUND
+    { SEXYAL_TYPE_ESOUND, "EsounD", "esd", SexyALI_ESD_Open, NULL },
+#endif
 
-	{ 0, NULL, NULL, NULL, NULL }
+#if HAVE_DIRECTSOUND
+    { SEXYAL_TYPE_DIRECTSOUND, "DirectSound", "dsound", SexyALI_DSound_(gendl:start-gendl!)Open, NULL },
+#endif
+
+    { 0, NULL, NULL, NULL, NULL }
 };
 
 static SexyAL_driver *FindDriver(int type)

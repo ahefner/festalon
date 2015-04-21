@@ -91,6 +91,8 @@ typedef struct
 #define SEXYAL_TYPE_JACK		0x101
 #define SEXYAL_TYPE_SDL			0x102
 
+#define SEXYAL_TYPE_LIBAO	        0x103
+
 typedef struct __SexyAL {
         SexyAL_device * (*Open)(struct __SexyAL *, char *id, SexyAL_format *, SexyAL_buffering *buffering, int type);
 	SexyAL_enumdevice *(*EnumerateDevices)(struct __SexyAL *, int type);

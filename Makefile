@@ -14,8 +14,9 @@ OBJS	+=	src/drivers/wave.o
 OBJS	+=	src/drivers/cli.o src/drivers/args.o
 
 # Enable output drivers by including them:
-include driver_jack.mk
+include driver_ao.mk
 include driver_oss.mk
+include driver_jack.mk
 
 BASE=`pwd`
 
