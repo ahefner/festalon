@@ -202,7 +202,7 @@ void *FESTA_malloc(uint32 align, uint32 total)
  {
   memcpy(tmp, &real, sizeof(void *));
   tmp += sizeof(void *);
- } while((unsigned int)tmp & (align - 1));
+ } while((uintptr_t)tmp & (align - 1));
  ret = tmp;
  //printf("%08x:%08x\n",real,ret);
  #endif

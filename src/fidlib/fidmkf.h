@@ -148,7 +148,7 @@ my_sqrt(double aa) {
 }
 
 STATIC_INLINE void 
-csqrt(double *aa) {
+fid_csqrt(double *aa) {
    double mag= hypot(aa[0], aa[1]);
    double rr= my_sqrt((mag + aa[0]) * 0.5);
    double ii= my_sqrt((mag - aa[0]) * 0.5);
@@ -162,7 +162,7 @@ csqrt(double *aa) {
 //
 
 STATIC_INLINE void 
-cexpj(double *aa, double theta) {
+fid_cexpj(double *aa, double theta) {
    aa[0]= cos(theta);
    aa[1]= sin(theta);
 }
@@ -172,7 +172,7 @@ cexpj(double *aa, double theta) {
 //
 
 STATIC_INLINE void 
-cexp(double *aa) {
+fid_cexp(double *aa) {
    double mag= exp(aa[0]);
    aa[0]= mag * cos(aa[1]);
    aa[1]= mag * sin(aa[1]);
@@ -320,7 +320,7 @@ butterworth(int order) {
    for (a= 0; a<order-1; a += 2) {
       poltyp[a]= 2;
       poltyp[a+1]= 0;
-      cexpj(pol+a, M_PI - (order-a-1) * 0.5 * M_PI / order);
+      fid_cexpj(pol+a, M_PI - (order-a-1) * 0.5 * M_PI / order);
    }
    if (a < order) {
       poltyp[a]= 1;
@@ -425,7 +425,7 @@ bandpass(double freq1, double freq2) {
    // Run through the list backwards, expanding as we go
    for (a= n_pol, b= n_pol*2; a>0; ) {
       // hba= pole * bw;
-      // temp= csqrt(1.0 - square(w0 / hba));
+      // temp= fid_csqrt(1.0 - square(w0 / hba));
       // pole1= hba * (1.0 + temp);
       // pole2= hba * (1.0 - temp);
 
@@ -435,7 +435,7 @@ bandpass(double freq1, double freq2) {
 	 poltyp[b]= 2; poltyp[b+1]= 0;
 	 hba= pol[a] * bw;
 	 cassz(pol+b, 1.0 - (w0 / hba) * (w0 / hba), 0.0);
-	 csqrt(pol+b);
+	 fid_csqrt(pol+b);
 	 caddz(pol+b, 1.0, 0.0);
 	 cmulr(pol+b, hba);
       } else {		// Assume poltyp[] data is valid
@@ -451,7 +451,7 @@ bandpass(double freq1, double freq2) {
 	 csqu(pol+b);
 	 cneg(pol+b);
 	 caddz(pol+b, 1.0, 0.0);
-	 csqrt(pol+b);
+	 fid_csqrt(pol+b);
 	 cmul(pol+b, hba);
 	 cass(pol+b+2, pol+b);
 	 cneg(pol+b+2);
@@ -486,7 +486,7 @@ bandstop(double freq1, double freq2) {
    // Run through the list backwards, expanding as we go
    for (a= n_pol, b= n_pol*2; a>0; ) {
       // hba= bw / pole;
-      // temp= csqrt(1.0 - square(w0 / hba));
+      // temp= fid_csqrt(1.0 - square(w0 / hba));
       // pole1= hba * (1.0 + temp);
       // pole2= hba * (1.0 - temp);
 
@@ -496,7 +496,7 @@ bandstop(double freq1, double freq2) {
 	 poltyp[b]= 2; poltyp[b+1]= 0;
 	 hba= bw / pol[a];
 	 cassz(pol+b, 1.0 - (w0 / hba) * (w0 / hba), 0.0);
-	 csqrt(pol+b);
+	 fid_csqrt(pol+b);
 	 caddz(pol+b, 1.0, 0.0);
 	 cmulr(pol+b, hba);
       } else {		// Assume poltyp[] data is valid
@@ -513,7 +513,7 @@ bandstop(double freq1, double freq2) {
 	 csqu(pol+b);
 	 cneg(pol+b);
 	 caddz(pol+b, 1.0, 0.0);
-	 csqrt(pol+b);
+	 fid_csqrt(pol+b);
 	 cmul(pol+b, hba);
 	 cass(pol+b+2, pol+b);
 	 cneg(pol+b+2);
@@ -594,7 +594,7 @@ s2z_matchedZ() {
 	    pol[a]= exp(pol[a]);
 	 a++;
       } else {
-	 cexp(pol+a);
+	 fid_cexp(pol+a);
 	 a += 2;
       }
    }
@@ -608,7 +608,7 @@ s2z_matchedZ() {
 	    zer[a]= exp(zer[a]);
 	 a++;
       } else {
-	 cexp(zer+a);
+	 fid_cexp(zer+a);
 	 a += 2;
       }
    }
@@ -754,17 +754,17 @@ bandpass_res(double freq, double qfact) {
    zer[0]= 1; zer[1]= -1;
 
    if (qfact == 0.0) {
-      cexpj(pol, theta);
+      fid_cexpj(pol, theta);
       return;
    }
 
    // Do a full binary search, rather than seeding it as Tony Fisher does
-   cexpj(val, theta);
+   fid_cexpj(val, theta);
    mag= exp(-theta / (2.0 * qfact));
    th0= 0; th2= M_PI;
    for (cnt= 60; cnt > 0; cnt--) {
       th1= 0.5 * (th0 + th2);
-      cexpj(pol, th1);
+      fid_cexpj(pol, th1);
       cmulr(pol, mag);
       
       // Evaluate response of filter for Z= val
@@ -799,7 +799,7 @@ static void
 bandstop_res(double freq, double qfact) {
    bandpass_res(freq, qfact);
    zertyp[0]= 2; zertyp[1]= 0;
-   cexpj(zer, TWOPI * freq);
+   fid_cexpj(zer, TWOPI * freq);
 }
 
 //
