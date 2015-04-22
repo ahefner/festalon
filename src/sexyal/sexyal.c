@@ -103,7 +103,7 @@ static SexyAL_driver drivers[] =
 #endif
 
 #if HAVE_DIRECTSOUND
-    { SEXYAL_TYPE_DIRECTSOUND, "DirectSound", "dsound", SexyALI_DSound_(gendl:start-gendl!)Open, NULL },
+    { SEXYAL_TYPE_DIRECTSOUND, "DirectSound", "dsound", SexyALI_DSound_Open, NULL },
 #endif
 
     { 0, NULL, NULL, NULL, NULL }
