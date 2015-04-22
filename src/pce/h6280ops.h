@@ -59,9 +59,11 @@
 #define PCW h6280->pc.w.l
 #define PCD h6280->pc.d
 
-
-#define PUSH(Rg)            h6280->ram[h6280->sp.d] = Rg; S--
-#define PULL(Rg)            S++; Rg = h6280->ram[h6280->sp.d]
+/* 7FFF is an arbitrary hack based on the size of ram that's
+ * initialized, so that a corrupted stack pointer can't scribble over
+ * arbitray memory. Shouldn't stack access go through the MMR too? */
+#define PUSH(Rg)            h6280->ram[h6280->sp.d & 0x7FFF] = Rg; S--
+#define PULL(Rg)            S++; Rg = h6280->ram[h6280->sp.d & 0x7FFF]
 
 /***************************************************************
  * compose the real flag register by

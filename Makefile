@@ -20,6 +20,8 @@ include driver_jack.mk
 
 BASE=`pwd`
 
+CFLAGS += -DLSB_FIRST
+
 CFLAGS += -Isrc/ -I$(BASE)/src/fidlib/ -DFIDLIB_LINUX -DFESTALON_VERSION=\"$(FESTALON_VERSION)\"
 LDFLAGS += -lm -lsamplerate
 
