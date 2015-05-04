@@ -53,8 +53,27 @@ SexyAL_device *SexyALI_AO_Open(char *id, SexyAL_format *format, SexyAL_buffering
     SexyAL_device *device;
     ao_device *aodev;
     ao_sample_format aofmt;
+    ao_info **drivers;
+    int driver_count = 0;
+
+    printf("AO_open \"%s\"\n", id);
 
     ao_initialize();
+    drivers = ao_driver_info_list(&driver_count);
+    if (drivers != NULL)
+    {
+        int i;
+        for (i=0; i<driver_count; i++)
+        {
+            int j;
+            printf("driver %i: %s (%s)\n", i, drivers[i]->name, drivers[i]->short_name);
+            for (j=0; j<drivers[i]->option_count; j++)
+            {
+                printf("  option: %s\n", drivers[i]->options[j]);
+            }
+        }
+    }
+
 
     memset(&aofmt, 0, sizeof(aofmt));
     aofmt.bits = 16;

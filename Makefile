@@ -8,13 +8,13 @@ OBJS	+=	src/nes/ext/vrc6.o src/nes/ext/vrc7.o src/nes/ext/emu2413.o src/nes/ext/
 
 OBJS	+=	src/pce/hes.o src/pce/vdc.o src/pce/system.o src/pce/psg.o src/pce/pce.o src/pce/h6280.o
 
-OBJS	+=	src/sexyal/sexyal.o src/sexyal/convert.o src/sexyal/md5.o src/sexyal/smallc.o
+#OBJS	+=	src/sexyal/sexyal.o src/sexyal/convert.o src/sexyal/md5.o src/sexyal/smallc.o
 OBJS	+=	src/drivers/wave.o
 
 OBJS	+=	src/drivers/cli.o src/drivers/args.o
 
 # Enable output drivers by including them:
-include driver_ao.mk
+#include driver_ao.mk
 #include driver_oss.mk
 #include driver_jack.mk
 
