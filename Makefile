@@ -1,4 +1,6 @@
 
+PREFIX?=/usr/local
+
 FESTALON_VERSION="0.5.5"
 
 OBJS	=	src/festalon.o src/filter.o src/cputest.o src/nes/x6502.o src/nes/sound.o src/nes/nsf.o src/nes/cart.o src/nes/nsfe.o
@@ -32,3 +34,7 @@ festalon: $(OBJS)
 clean:
 	rm -f festalon $(OBJS)
 
+install: festalon
+	install -m 0755 festalon $(PREFIX)/bin
+
+.PHONY:	install clean
