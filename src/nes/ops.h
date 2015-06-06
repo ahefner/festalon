@@ -17,7 +17,14 @@
  */
 
 case 0x00:  /* BRK */
+
+            if ((RdMem(X,_PC)) == 0xF1) {
+                printf("Code signalled end of playback via BRK instruction. Exiting.\n");
+                exit(1);
+            }
+
             _PC++;
+
             PUSH(_PC>>8);
             PUSH(_PC);
             PUSH(_P|U_FLAG|B_FLAG);
