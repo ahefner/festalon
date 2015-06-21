@@ -46,6 +46,7 @@ static int RawClose(SexyAL_device *device)
 {
     ao_close(device->private);
     device->private = NULL;
+    return 1;
 }
 
 SexyAL_device *SexyALI_AO_Open(char *id, SexyAL_format *format, SexyAL_buffering *buffering)
