@@ -66,7 +66,7 @@ SexyAL_device *SexyALI_AO_Open(char *id, SexyAL_format *format, SexyAL_buffering
     format->sampformat = SEXYAL_FMT_PCMS16;
 
     aodev = ao_open_live(ao_default_driver_id(), &aofmt, NULL);
-    if (!device) return NULL;
+    if (!aodev) return NULL;
 
     device = malloc(sizeof(SexyAL_device));
     memcpy(&device->format, format, sizeof(SexyAL_format));
