@@ -1,3 +1,5 @@
+# Default optimization setting..
+CFLAGS ?= -O3
 
 PREFIX?=/usr/local
 
@@ -21,8 +23,6 @@ include driver_ao.mk
 #include driver_jack.mk
 
 BASE=`pwd`
-
-CFLAGS?=-O3
 
 CFLAGS += -DLSB_FIRST
 
