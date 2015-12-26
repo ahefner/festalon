@@ -19,6 +19,8 @@
 #ifndef CPUTEST_H
 #define CPUTEST_H
 
+#include <config.h>
+
 #define MM_C       0x0000 //plain C (default)
 #define MM_IA32ASM 0x0001 //32-bit assembler optimized code (non-MMX)
 #define MM_IA64ASM 0x0040 //64-bit assembler optimized code (non-MMX)

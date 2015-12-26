@@ -20,6 +20,8 @@
 #ifndef __FESTAH_TYPESH
 #define __FESTAH_TYPESH
 
+#include <config.h>
+
 #include <inttypes.h>
 typedef int8_t int8;
 typedef int16_t int16;

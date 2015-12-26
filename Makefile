@@ -22,6 +22,8 @@ include driver_ao.mk
 
 BASE=`pwd`
 
+CFLAGS?=-O3
+
 CFLAGS += -DLSB_FIRST
 
 CFLAGS += -Isrc/ -I$(BASE)/src/fidlib/ -DFIDLIB_LINUX -DFESTALON_VERSION=\"$(FESTALON_VERSION)\"
