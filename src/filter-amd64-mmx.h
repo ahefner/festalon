@@ -67,8 +67,8 @@
 		#endif
 		"mov %%rbp, (%%rax)\n\t"
 
-		"fild (%%rax)\n\t"
-		"fstp (%%rax)\n\t"
+		"filds (%%rax)\n\t"
+		"fstps (%%rax)\n\t"
 		"add $4, %%rax\n\t"
 		"dec %%rcx\n\t"
 		"jnz convmmx"FILTMMX_SKIP_ADD_STR"\n\t"
