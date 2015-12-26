@@ -8,6 +8,16 @@
 #include "cputest.h"
 
 /* ebx saving is necessary for PIC. gcc seems unable to see it alone */
+#if __x86_64__
+#define cpuid(index,eax,ebx,ecx,edx)\
+    __asm __volatile\
+	("mov %%rbx, %%rsi\n\t"\
+         "cpuid\n\t"\
+         "xchg %%rbx, %%rsi"\
+         : "=a" (eax), "=S" (ebx),\
+           "=c" (ecx), "=d" (edx)\
+         : "a" (index));
+#else
 #define cpuid(index,eax,ebx,ecx,edx)\
     __asm __volatile\
 	("movl %%ebx, %%esi\n\t"\
@@ -16,6 +26,7 @@
          : "=a" (eax), "=S" (ebx),\
            "=c" (ecx), "=d" (edx)\
          : "a" (index));
+#endif
 
 #define CPUID_STD_MMX          0x00800000
 #define CPUID_STD_SSE          0x02000000
